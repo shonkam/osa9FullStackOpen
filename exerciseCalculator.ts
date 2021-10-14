@@ -75,6 +75,9 @@ const argumentsParse = (args: Array<string>): exerciseArgs => {
   if (!isNaN(Number(args[2]))) {
     target = Number(args[2]);
   }
+  else {
+    throw new Error("Please, provide only numbers");
+  }
   let y = 3;
   while (args[y] !== undefined) {
     if (!isNaN(Number(args[y]))) {
