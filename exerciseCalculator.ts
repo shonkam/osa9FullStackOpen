@@ -1,29 +1,27 @@
-type ratingScale = 1 | 2 | 3
-
 interface Results {
   periodLength: number;
   trainingDays: number;
   success: boolean;
-  rating: ratingScale;
+  rating: number;
   ratingDescription: string;
-  target: ratingScale;
+  target: number;
   averageTime: number;
 }
 
-const calculateExercises = (args: Array<number>, userTarget: ratingScale): Results => {
+const calculateExercises = (exerciseArray: Array<number>, userTarget: number): Results => {
 
   let daysWhenTrained = 0;
   let sum = 0;
 
-  for (var i = 0; i < args.length; i++) {
-    sum = sum + args[i];
-    if (args[i] !== 0) {
+  for (var i = 0; i < exerciseArray.length; i++) {
+    sum = sum + exerciseArray[i];
+    if (exerciseArray[i] !== 0) {
       daysWhenTrained++;
     }
 
   }
-  let trainingRating: ratingScale;
-  const average = sum / args.length;
+  let trainingRating: number;
+  const average = sum / exerciseArray.length;
 
   if (average < 1.5) {
     trainingRating = 1;
@@ -56,7 +54,7 @@ const calculateExercises = (args: Array<number>, userTarget: ratingScale): Resul
   }
 
   return {
-    periodLength: args.length,
+    periodLength: exerciseArray.length,
     trainingDays: daysWhenTrained,
     success: targetMet,
     rating: trainingRating,
@@ -66,5 +64,37 @@ const calculateExercises = (args: Array<number>, userTarget: ratingScale): Resul
   }
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
-console.log(calculateExercises([3, 5, 2, 4.5, 0, 5, 6], 3));
+interface exerciseArgs {
+  exerciseArray: Array<number>;
+  userTarget: number;
+}
+const argumentsParse = (args: Array<string>): exerciseArgs => {
+  if (args.length < 3) throw new Error('Please, provide at least the training amount of one day and your target score');
+  let valueArray: Array<number> = [];
+  let target: number;
+  if (!isNaN(Number(args[2]))) {
+    target = Number(args[2]);
+  }
+  let y = 3;
+  while (args[y] !== undefined) {
+    if (!isNaN(Number(args[y]))) {
+      let number = Number(args[y]);
+      valueArray.push(number);
+    }
+    else {
+      throw new Error("Please, provide only numbers");
+    }
+    y++;
+  }
+  return {
+    exerciseArray: valueArray,
+    userTarget: target
+  }
+}
+
+try {
+  const { exerciseArray, userTarget } = argumentsParse(process.argv);
+  console.log(calculateExercises(exerciseArray, userTarget));
+} catch (err) {
+  console.log(err.message);
+}
