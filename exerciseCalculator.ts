@@ -54,7 +54,6 @@ const calculateExercises = (args: Array<number>, userTarget: ratingScale): Resul
   else {
     targetMet = false;
   }
-  console.log('func');
 
   return {
     periodLength: args.length,
