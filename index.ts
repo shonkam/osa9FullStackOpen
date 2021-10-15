@@ -7,20 +7,20 @@ app.get('/hello', (_req, res) => {
 });
 
 app.get('/bmi', (req, res) => {
-  
-    if(!isNaN(Number(req.query.height)) && !isNaN(Number(req.query.weight))){
-  const response = calculateBmi(Number(req.query.height), Number(req.query.weight));
-    
-  res.send({
-        weight: Number(req.query.weight),
-        height: Number(req.query.height),
-        bmi: response});
+
+  if (!isNaN(Number(req.query.height)) && !isNaN(Number(req.query.weight))) {
+    const response = calculateBmi(Number(req.query.height), Number(req.query.weight));
+
+    res.send({
+      weight: Number(req.query.weight),
+      height: Number(req.query.height),
+      bmi: response
+    });
   }
-  else{
-      res.status(400).send({error: "malformatted parameters"});
+  else {
+    res.status(400).send({ error: "malformatted parameters" });
   }
 });
-
 
 const PORT = 3003;
 

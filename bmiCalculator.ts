@@ -8,7 +8,7 @@ const calculateBmi = (height: number, weight: number) => {
   weight * 2;
   height * 2;
 
-  let BMI = (weight / (height ** 2) * 10000);
+  const BMI = (weight / (height ** 2) * 10000);
 
   if (BMI <= 16.0) {
     return "Underweight (Severe thinness)";
@@ -37,7 +37,7 @@ const calculateBmi = (height: number, weight: number) => {
   else {
     return "Something went wrong when calculating BMI";
   }
-}
+};
 
 const parseArguments = (args: Array<string>): Person => {
   if (args.length < 4) throw new Error('Please, provide first height and then weight');
@@ -51,14 +51,14 @@ const parseArguments = (args: Array<string>): Person => {
   }
   else {
     throw new Error("Please, provide only numbers");
-  };
-}
+  }
+};
 
 try {
   const { height, weight } = parseArguments(process.argv);
   console.log(calculateBmi(height, weight));
-} catch (err) {
-  console.log(err.message); 
-};
+} catch (error: unknown) {
+  console.log(error);
+}
 
-export {calculateBmi}; 
+export { calculateBmi };

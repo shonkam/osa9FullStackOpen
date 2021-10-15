@@ -13,14 +13,13 @@ const calculateExercises = (exerciseArray: Array<number>, userTarget: number): R
   let daysWhenTrained = 0;
   let sum = 0;
 
-  for (var i = 0; i < exerciseArray.length; i++) {
+  for (let i = 0; i < exerciseArray.length; i++) {
     sum = sum + exerciseArray[i];
     if (exerciseArray[i] !== 0) {
       daysWhenTrained++;
     }
-
   }
-  let trainingRating: number;
+  let trainingRating = 1;
   const average = sum / exerciseArray.length;
 
   if (average < 1.5) {
@@ -34,7 +33,7 @@ const calculateExercises = (exerciseArray: Array<number>, userTarget: number): R
     trainingRating = 3;
   }
 
-  let desc: string;
+  let desc = '';
   if (trainingRating === 1) {
     desc = "C'mon, pick it up!";
   }
@@ -61,8 +60,8 @@ const calculateExercises = (exerciseArray: Array<number>, userTarget: number): R
     ratingDescription: desc,
     target: userTarget,
     averageTime: average
-  }
-}
+  };
+};
 
 interface exerciseArgs {
   exerciseArray: Array<number>;
@@ -70,7 +69,7 @@ interface exerciseArgs {
 }
 const argumentsParse = (args: Array<string>): exerciseArgs => {
   if (args.length < 3) throw new Error('Please, provide at least the training amount of one day and your target score');
-  let valueArray: Array<number> = [];
+  const valueArray: Array<number> = [];
   let target: number;
   if (!isNaN(Number(args[2]))) {
     target = Number(args[2]);
@@ -81,7 +80,7 @@ const argumentsParse = (args: Array<string>): exerciseArgs => {
   let y = 3;
   while (args[y] !== undefined) {
     if (!isNaN(Number(args[y]))) {
-      let number = Number(args[y]);
+      const number = Number(args[y]);
       valueArray.push(number);
     }
     else {
@@ -92,12 +91,14 @@ const argumentsParse = (args: Array<string>): exerciseArgs => {
   return {
     exerciseArray: valueArray,
     userTarget: target
-  }
-}
+  };
+};
 
 try {
   const { exerciseArray, userTarget } = argumentsParse(process.argv);
   console.log(calculateExercises(exerciseArray, userTarget));
-} catch (err) {
-  console.log(err.message);
+} catch (error: unknown) {
+  console.log(error);
 }
+
+export { calculateExercises };
