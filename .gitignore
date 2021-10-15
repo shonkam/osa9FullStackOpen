@@ -1,3 +1,5 @@
+.eslintrc
+/requests
 # Logs
 logs
 *.log

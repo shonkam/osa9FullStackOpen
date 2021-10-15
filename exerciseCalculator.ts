@@ -22,14 +22,14 @@ const calculateExercises = (exerciseArray: Array<number>, userTarget: number): R
   let trainingRating = 1;
   const average = sum / exerciseArray.length;
 
-  if (average < 1.5) {
+  if ((average + 1) < userTarget) {
     trainingRating = 1;
   }
-  else if (average < 2.5 && average >= 1.5) {
+  else if ((average - 1) <= userTarget && average >= (userTarget - 1)) {
     trainingRating = 2;
   }
 
-  else if (average >= 2.5) {
+  else if (average > (userTarget + 1)) {
     trainingRating = 3;
   }
 
@@ -38,10 +38,10 @@ const calculateExercises = (exerciseArray: Array<number>, userTarget: number): R
     desc = "C'mon, pick it up!";
   }
   else if (trainingRating === 2) {
-    desc = "Not too bad, but you can do better!";
+    desc = "Well done, but you can still do better!";
   }
   else if (trainingRating === 3) {
-    desc = "Fantastic job!";
+    desc = "Fantastic job this week, keep it going!";
   }
 
   let targetMet: boolean;
