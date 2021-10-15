@@ -47,11 +47,11 @@ const parseArguments = (args: Array<string>): Person => {
     return {
       height: Number(args[2]),
       weight: Number(args[3])
-    }
+    };
   }
   else {
     throw new Error("Please, provide only numbers");
-  }
+  };
 }
 
 try {
@@ -59,6 +59,6 @@ try {
   console.log(calculateBmi(height, weight));
 } catch (err) {
   console.log(err.message); 
-}
+};
 
 export {calculateBmi}; 
