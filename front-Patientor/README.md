@@ -1,4 +1,4 @@
-## Frontend (this folder) for the project "Patientor" is cloned from [here] (https://github.com/fullstack-hy/patientor).
+## Frontend (this folder) for the project "Patientor" is cloned from [here](https://github.com/fullstack-hy/patientor).
 
 # Patientor - frontend
 
